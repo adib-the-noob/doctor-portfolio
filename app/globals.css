@@ -2,98 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --ink: #0E1418;
-  --paper: #F2EFE8;
-  --paper2: #E9E4D8;
-  --signal: #C8442A;
-  --moss: #3F5B4A;
-  --ash: #6B6F73;
-  --rule: #1F2A30;
-}
-
 html, body {
-  background: var(--paper);
-  color: var(--ink);
-  font-feature-settings: "ss01", "cv11";
+  background: #F2EFE8;
+  color: #0E1418;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-bn-sans), "Noto Sans Bengali", "Hind Siliguri",
+    ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "kern", "liga";
 }
 
-/* Subtle paper texture using two radial gradients — keeps the page from looking like a flat CSS color */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    radial-gradient(1200px 600px at 10% -10%, rgba(14,20,24,0.04), transparent 60%),
-    radial-gradient(900px 500px at 110% 10%, rgba(200,68,42,0.035), transparent 60%),
-    radial-gradient(700px 500px at 50% 120%, rgba(63,91,74,0.04), transparent 60%);
-  mix-blend-mode: multiply;
+::selection {
+  background: #0E1418;
+  color: #F2EFE8;
 }
 
-main, header, footer, section {
-  position: relative;
-  z-index: 1;
-}
-
-/* Optical size control for Fraunces */
-.font-display {
-  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
-  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 0;
-}
-
-/* Display sizes get tighter, almost-compressed optical feel */
-.display-tight { font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0; letter-spacing: -0.035em; line-height: 0.92; }
-
-/* Hairline rule that varies thickness subtly along its length (chart annotation feel) */
-.hair-rule {
-  background: linear-gradient(to right, var(--rule) 0%, var(--rule) 30%, transparent 30%, transparent 32%, var(--rule) 32%, var(--rule) 100%);
-  height: 1px;
-}
-
-.dotted-rule {
-  background-image: radial-gradient(circle, var(--rule) 1px, transparent 1.5px);
-  background-size: 6px 1px;
-  background-repeat: repeat-x;
-  height: 1px;
-}
-
-/* Subtle, deliberate focus ring */
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid #0E1418;
   outline-offset: 3px;
   border-radius: 2px;
 }
 
-/* Selection */
-::selection {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-/* Custom number field controls hidden */
 input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-
-/* Reveal animation utility */
-@keyframes rise {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0); }
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
-.rise { animation: rise 0.9s cubic-bezier(0.2, 0.6, 0.2, 1) both; }
-.rise-1 { animation-delay: 0.05s; }
-.rise-2 { animation-delay: 0.18s; }
-.rise-3 { animation-delay: 0.32s; }
-.rise-4 { animation-delay: 0.46s; }
-.rise-5 { animation-delay: 0.6s; }
 
+/* ECG animation */
 @keyframes ecg-trace {
   0%   { stroke-dashoffset: 1200; }
   100% { stroke-dashoffset: 0; }
@@ -102,67 +41,29 @@ input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; marg
   stroke-dasharray: 1200;
   animation: ecg-trace 3.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
-
-@keyframes pulse-dot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50%      { transform: scale(1.4); opacity: 0.6; }
-}
-.pulse-dot {
-  animation: pulse-dot 1.6s ease-in-out infinite;
-  transform-origin: center;
-}
-
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .rise, .ecg-path, .pulse-dot { animation: none !important; }
-  .ecg-path { stroke-dasharray: none; }
+  .ecg-path { animation: none !important; stroke-dasharray: none; }
 }
 
-/* Range slider — used in time-of-day picker */
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  background: transparent;
-}
-input[type="range"]::-webkit-slider-runnable-track {
-  height: 1px;
-  background: var(--rule);
-}
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 14px; height: 14px;
-  background: var(--ink);
-  border-radius: 999px;
-  margin-top: -7px;
-  cursor: pointer;
-}
-input[type="range"]::-moz-range-track { height: 1px; background: var(--rule); }
-input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; background: var(--ink); border: none; border-radius: 999px; cursor: pointer; }
-
-/* Form text inputs */
+/* Form fields */
 .field {
   width: 100%;
   background: transparent;
   border: 0;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid rgba(14, 20, 24, 0.25);
   padding: 0.6rem 0;
   font-size: 1rem;
-  color: var(--ink);
+  color: #0E1418;
   outline: none;
   transition: border-color 200ms ease;
 }
-.field::placeholder { color: rgba(14,20,24,0.4); }
-.field:focus { border-bottom-color: var(--signal); }
+.field::placeholder { color: rgba(14, 20, 24, 0.35); }
+.field:focus { border-bottom-color: #C8442A; }
 
 label.label {
   display: block;
-  font-family: var(--font-jetbrains), ui-monospace, monospace;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--ash);
+  font-size: 0.85rem;
+  color: rgba(14, 20, 24, 0.6);
   margin-bottom: 0.35rem;
 }
 
@@ -170,78 +71,22 @@ label.label {
 .btn-ink {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  background: var(--ink);
-  color: var(--paper);
-  padding: 0.85rem 1.3rem;
-  font-family: var(--font-inter), sans-serif;
-  font-size: 0.85rem;
-  letter-spacing: 0.02em;
-  transition: transform 200ms ease, background 200ms ease;
-  border: 1px solid var(--ink);
+  justify-content: center;
+  gap: 0.5rem;
+  background: #0E1418;
+  color: #F2EFE8;
+  padding: 0.85rem 1.5rem;
+  font-size: 1rem;
+  border: 1px solid #0E1418;
+  transition: background 200ms ease, transform 200ms ease;
+  cursor: pointer;
 }
-.btn-ink:hover { background: #1a252b; transform: translateY(-1px); }
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: transparent;
-  color: var(--ink);
-  padding: 0.85rem 1.3rem;
-  font-size: 0.85rem;
-  border: 1px solid var(--rule);
-  transition: background 200ms ease, color 200ms ease;
+.btn-ink:hover {
+  background: #1a252b;
+  transform: translateY(-1px);
 }
-.btn-ghost:hover { background: var(--ink); color: var(--paper); }
-
-/* Marker labels in monospace (chart-annotation style) */
-.marker {
-  font-family: var(--font-jetbrains), ui-monospace, monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ash);
+.btn-ink:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
 }
-.marker-ink { color: var(--ink); }
-.marker-signal { color: var(--signal); }
-
-/* Display headline utility */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  font-family: var(--font-jetbrains), ui-monospace, monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--ink);
-}
-.eyebrow::before {
-  content: "";
-  width: 28px; height: 1px;
-  background: var(--ink);
-}
-
-/* "Section" labels — used as if they were chart rooms */
-.room-tag {
-  font-family: var(--font-jetbrains), ui-monospace, monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
-  color: var(--ash);
-}
-
-/* Tag pills for services */
-.tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-family: var(--font-jetbrains), ui-monospace, monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink);
-  border: 1px solid var(--rule);
-  padding: 0.25rem 0.6rem;
-}
-.tag-signal { color: var(--signal); border-color: var(--signal); }
-.tag-moss { color: var(--moss); border-color: var(--moss); }

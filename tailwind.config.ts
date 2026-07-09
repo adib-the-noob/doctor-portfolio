@@ -10,23 +10,15 @@ const config: Config = {
       colors: {
         ink: "#0E1418",
         paper: "#F2EFE8",
-        paper2: "#E9E4D8",
         signal: "#C8442A",
-        moss: "#3F5B4A",
-        ash: "#6B6F73",
-        rule: "#1F2A30",
+        bdgreen: "#006A4E",
       },
       fontFamily: {
-        display: ['var(--font-fraunces)', 'ui-serif', 'Georgia', 'serif'],
-        sans: ['var(--font-inter)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-jetbrains)', 'ui-monospace', 'Menlo', 'monospace'],
-      },
-      letterSpacing: {
-        tightest: '-0.04em',
-        tighter2: '-0.025em',
+        display: ['var(--font-bn-serif)', 'Georgia', 'serif'],
+        sans: ['var(--font-bn-sans)', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
-        '8xl': '88rem',
+        '6xl': '72rem',
       },
     },
   },

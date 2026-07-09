@@ -1,37 +1,27 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import { Noto_Serif_Bengali, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 
-// Next.js's next/font/google will fetch and self-host the fonts at build time.
-// If the build environment is offline, it falls back gracefully to system fonts
-// declared in the font-family stacks (Georgia / system-ui / Menlo).
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
+const display = Noto_Serif_Bengali({
+  subsets: ["bengali"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-bn-serif",
   display: "swap",
-  axes: ["opsz", "SOFT", "WONK"],
-  fallback: ["Georgia", "ui-serif", "serif"],
+  fallback: ["Georgia", "serif"],
 });
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
+const body = Hind_Siliguri({
+  subsets: ["bengali"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-bn-sans",
   display: "swap",
-  fallback: ["system-ui", "ui-sans-serif", "sans-serif"],
-});
-
-const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains",
-  display: "swap",
-  fallback: ["Menlo", "ui-monospace", "monospace"],
+  fallback: ["system-ui", "sans-serif"],
 });
 
 export const metadata: Metadata = {
-  title: "Dr. Mira Halden — Cardiology, Private Practice",
+  title: "ডা. তানভীর হাসান — হৃদরোগ বিশেষজ্ঞ",
   description:
-    "Board-certified cardiologist Mira Halden, MD. Personalized cardiovascular care, advanced diagnostics, and same-week appointments in a calm, unhurried practice.",
+    "ঢাকার হৃদরোগ বিশেষজ্ঞ ডা. তানভীর হাসান। একই সপ্তাহে অ্যাপয়েন্টমেন্ট, সাশ্রয়ী মূল্যে চেম্বার কনসালটেশন।",
 };
 
 export default function RootLayout({
@@ -40,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable}`}>
+    <html lang="bn" className={`${display.variable} ${body.variable}`}>
       <body className="antialiased">{children}</body>
     </html>
   );
